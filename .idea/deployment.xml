@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Ampps">
+    <serverData>
+      <paths name="Ampps">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="localhost/formatif-1-elliotGaulin" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wordpress2021-gaulinelliot">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

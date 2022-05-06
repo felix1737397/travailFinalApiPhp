@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Formatif 1
+  description: Services Web H2022
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/elliotGaulin/formatif/1.0.0
+  - url: http://localhost/formatif1_serviceweb_h2022
+paths:
+  /:
+    get:
+      tags:
+        - Général
+      summary: Message de bienvenue
+      responses:
+        '200':
+          description: "Message de bienvenue"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  message : 'Bon examen à tous!!'
+  /athletes/{id}:
+    get:
+      tags:
+        - Général
+      summary: Affiche les informations d'un athlete
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Identifiant de l'athlete
+      responses:
+        '200':
+          description: "Les infos de l'athlète"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                example:
+                  id: '15'
+                  nom: Jeanequin
+                  prenom: MaÃ«lla
+                  date_naissance: '1954-11-23'
+                  adresse: 4 Carioca Terrace
+                  ville: Wingham
+                  province: Ontario
+                  pays: Canada
+                  courriel: mjeanequine@devhub.com
+        '404':
+          description: Athlète inexistant
+          content:
+            application/json:
+              schema:
+                type: object
