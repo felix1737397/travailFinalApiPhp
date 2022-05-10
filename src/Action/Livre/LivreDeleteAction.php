@@ -36,7 +36,7 @@ final class LivreDeleteAction
 
             return $response
                 ->withHeader('Content-Type', 'application/json')
-                ->withStatus(400);
+                ->withStatus(405);
         }
     }
 }

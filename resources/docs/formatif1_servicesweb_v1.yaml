@@ -7,8 +7,8 @@ info:
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/elliotGaulin/formatif/1.0.0
-  - url: http://localhost/formatif1_serviceweb_h2022
+    url: https://virtserver.swaggerhub.com/travailFinalApiPhp/1.0.0
+  - url: http://localhost/travailFinalApiPhp
 paths:
   /:
     get:

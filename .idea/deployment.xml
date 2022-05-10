@@ -5,11 +5,11 @@
       <paths name="Ampps">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="localhost/formatif-1-elliotGaulin" />
+            <mapping local="$PROJECT_DIR$" web="localhost/travailFinalApiPhp" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="wordpress2021-gaulinelliot">
+      <paths name="travailFinalApiPhp">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

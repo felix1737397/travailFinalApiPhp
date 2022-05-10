@@ -12,7 +12,7 @@ return function (App $app) {
     $app->get('/livres', \App\Action\Livre\LivreViewAction::class);
     $app->post('/livres', \App\Action\Livre\LivreCreateAction::class);
     $app->delete('/livres/{isbn}', \App\Action\Livre\LivreDeleteAction::class);
-    $app->put('/livres/{isbn}', \App\Action\Livre\LivreUpdateAction::class)->add(\App\Middleware\AuthMiddleware::class);
+    $app->put('/livres/{isbn}/{cleApi}', \App\Action\Livre\LivreUpdateAction::class);
 
 
     

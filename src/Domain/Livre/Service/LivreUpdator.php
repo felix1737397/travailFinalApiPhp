@@ -2,6 +2,7 @@
 namespace App\Domain\Livre\Service;
 use App\Domain\Livre\Repository\LivreUpdatorRepository;
 use App\Exception\ValidationException;
+use PDO;
 
 /**
  * Service.
@@ -12,17 +13,21 @@ final class LivreUpdator
      * @var LivreUpdatorRepository
      */
     private $repository;
+    private $connection;
+
 
     /**
      * The constructor.
      *
      * @param LivreUpdatorRepository $repository The repository
      */
-    public function __construct(LivreUpdatorRepository $repository)
+    public function __construct(LivreUpdatorRepository $repository, PDO $connection)
     {
         $this->repository = $repository;
-    }
+        $this->connection = $connection;
 
+    }
+    
     /**
      * Create a new livre.
      *
@@ -30,13 +35,13 @@ final class LivreUpdator
      *
      * @return int The new user ID
      */
-    public function updateLivre(array $data, $isbn): bool
+    public function updateLivre(array $data, $isbn, $cleApi): bool
     {
         // Input validation
-        $this->validateUpdateLivre($data);
+        $this->validateUpdateLivre($data, $cleApi);
 
         // Insert livre
-        $reussite = $this->repository->updateLivre($data, $isbn);
+        $reussite = $this->repository->updateLivre($data, $isbn, $cleApi);
 
         // Logging here: User created successfully
         //$this->logger->info(sprintf('User created successfully: %s', $userId));
@@ -52,7 +57,7 @@ final class LivreUpdator
      *
      * @return void
      */
-    private function validateUpdateLivre(array $data): void
+    private function validateUpdateLivre(array $data, $cleApi): void
     {
         $errors = [];
 
@@ -85,6 +90,17 @@ final class LivreUpdator
         }
         if (empty($data['image'])) {
             $errors['image'] = 'Input required';
+        }
+        if (empty($cleApi)) {
+            $errors['cleApi'] = 'Input required';
+        }
+        else{
+            $sqlApi = "SELECT cle_api FROM user WHERE cle_api = ?";
+            $stmt = $this->connection->prepare($sqlApi);
+            $stmt->execute([$cleApi]);
+            if($stmt->rowCount() == 0){
+                $errors['cleApi'] = 'Input required';
+            }
         }
         if ($errors) {
             throw new ValidationException('Please check your input', $errors);

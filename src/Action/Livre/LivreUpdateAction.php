@@ -22,9 +22,10 @@ final class LivreUpdateAction
         $data = (array)$request->getParsedBody();
 
         $isbn = $request->getAttribute('isbn', 0);
+        $cleApi = $request->getAttribute('cleApi', 0);
 
         
-        $result = $this->livreUpdator->updateLivre($data, $isbn);
+        $result = $this->livreUpdator->updateLivre($data, $isbn, $cleApi);
 
         if ($result == true){
 
@@ -42,17 +43,13 @@ final class LivreUpdateAction
         }
         else 
         {
-
-        $result = [
-            'référence inexistante, nouveau livre créé' => $isbn
-        ];
-
         // build the HTTP response
-        $response->getBody()->write((string)json_encode($result));
+        $result = ['Unauthorized'];
 
+        $response->getBody()->write((string)json_encode($result));
         return $response
             ->withHeader('Content-Type', 'application/json')
-            ->withStatus(201);
+            ->withStatus(401);
     }
 }
 }
