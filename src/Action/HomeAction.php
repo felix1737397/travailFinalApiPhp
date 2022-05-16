@@ -14,7 +14,7 @@ final class HomeAction
         
         $result = json_encode([
             'success' => true, 
-            'message' => 'Bon succès !!!',
+            'message' => 'Bienvenue sur l\'api de votre bibliothèque personnel! ',
         ]);
         
         $response->getBody()->write($result);

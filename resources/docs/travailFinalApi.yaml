@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Bibliothèque
+  description: Structure de l'api serviceWebFinal créé dans le cadre du cours Services Web H2022
+  
+servers: 
+  - url: https://calm-mesa-80514.herokuapp.com/
+paths: 
+  /livres:
+    get:
+      tags:
+      - livres
+      summary: Liste tous les livres de la base de donnée 
+      produces:
+      - application/json
+      parameters:
+      - name: auteur
+        in: query
+        description: Nom de famille de l'auteur
+        required: false
+        type: string
+      - name: id_livre
+        in: query
+        description: l'id du livre
+        required: false
+        type: string
+      - name: isbn
+        in: query
+        description: l'isbn du livre rechercé
+        required: false
+        type: string
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+        400:
+          description: Mauvaise informations données 
+    post: 
+      tags:
+      - livres
+      summary: Insère un nouveau livre dans la bibliothèque
+      parameters:
+      - in: body
+        name: body
+        description: Liste de livre
+        required: true
+        schema: 
+              example:
+                - prenom_auteur: Félix,
+                  nom_famille_auteur: Michaud,
+                  titre: Meilleur Api de la classe,
+                  nb_page: 245
+                  isbn: 12345,
+                  date_publication: 27 mars 2000,
+                  langue: francais,
+                  collection: Michaud,
+                  tome: 1
+                  image: https://i1.rgstatic.net/ii/profile.image/675049061240841-1537955646433_Q512/Felix-Michaud-2.jpg,
+      responses:
+        201:
+          description: livre modifié  
+  /livres/{isbn}:
+    delete: 
+      tags:
+      - livre
+      summary: Supprime un livre
+      parameters:
+      - name: isbn
+        in: path 
+        required: true
+        type: string
+      responses:
+        200: 
+          description: livre supprimé avec succès 
+        405:
+          description: Method not Allowed
+  /livres/{isbn}/{cleApi}:
+    put:
+      tags:
+      - livres
+      summary: Met à jour un livre
+      description: This can only be done by the logged in user.
+      operationId: updateLivre
+      produces:
+      - application/json
+      parameters:
+      - name: isbn
+        in: path
+        description: name that need to be updated
+        required: true
+        type: string
+      - name: cleApi
+        in: path
+        description: Cle de l'api
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Update un livre
+        required: true
+        schema:
+              example:
+                - prenom_auteur: Félix,
+                  nom_famille_auteur: Michaud,
+                  titre: Meilleur Api de la classe,
+                  nb_page: 245
+                  isbn: 12345,
+                  date_publication: 27 mars 2000,
+                  langue: francais,
+                  collection: Michaud,
+                  tome: 1
+                  image: https://i1.rgstatic.net/ii/profile.image/675049061240841-1537955646433_Q512/Felix-Michaud-2.jpg,
+                  cleApi: MaxleBeauGosse
+      responses:
+        200: 
+          description: livre modifié avec succès 
+        405:
+            description: Unauthorized
